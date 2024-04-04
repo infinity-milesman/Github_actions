@@ -1,29 +1,29 @@
-name: CI/CD
+name: CI/CD #Name of pipeline(It will be displayed in actions tab)
 
-on:
-  push:
-    branches:
+on: #On which all actions to run this workflow
+  push: #Specifying action
+    branches: #Specifying branch
       - master
 
 jobs:
-  build:
+  build: #Build will run on where?
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code #Checkout the code
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Set up Python #Setup python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
+      - name: Install dependencies #Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Deploy
+      - name: Deploy #Deploy the web application
         if: success()
         run: |
           pip install gunicorn
