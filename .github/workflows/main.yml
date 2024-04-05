@@ -23,8 +23,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Deploy #Deploy the web application
-        if: success()
-        run: |
-          pip install gunicorn
-          gunicorn -b 0.0.0.0:5000 app:app
+      # - name: Deploy #Deploy the web application
+      #   if: success()
+      #   run: |
+      #     pip install gunicorn
+      #     gunicorn -b 0.0.0.0:5000 app:app
+      - shell : bash
+        run : |
+          expr 1+1 > output.log
+      - name : Upload output file
+        uses: actions/upload-artifact@v4
+        with:  
+          name: output-log-file
+          path: output.log
